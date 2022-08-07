@@ -1,0 +1,46 @@
+<br />
+<nav class="navbar container navbar-light bg-light">
+  <div class="container-fluid">
+    <button (click)="getQuestions('All')" class="btn btn-outline-dark">
+      All
+    </button>
+    <button (click)="getQuestions('Java')" class="btn btn-outline-secondary">
+      Java
+    </button>
+    <button (click)="getQuestions('Python')" class="btn btn-outline-secondary">
+      Python
+    </button>
+    <button (click)="getQuestions('Cloud')" class="btn btn-outline-secondary">
+      Cloud
+    </button>
+    <button (click)="getQuestions('Others')" class="btn btn-outline-secondary">
+      Others
+    </button>
+  </div>
+</nav>
+<div class="my-3">
+  <table class="table me-2 container">
+    <tr>
+      <th>Question</th>
+      <th>Posted By</th>
+      <th>Topic</th>
+      <th>Get Answers</th>
+    </tr>
+
+    <tr *ngFor="let question of questions">
+      <td>{{ question.question }}</td>
+      <td>{{ question.user.name }}</td>
+      <td>{{ question.topic }}</td>
+
+      <td>
+        <button
+          class="btn my-2 btn-outline-success"
+          id="{{ question.id }}"
+          (click)="sendQuestionToGetAnswer(question.id)"
+        >
+          Get Answers
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,157 @@
+<div class="container my-3 d-flex flex-row float-right">
+  <span class="container me-5">
+    <h4 style="text-align: right">Welcome {{ admin.name }}</h4></span
+  >
+  <span class="container">
+    <button
+      class="btn me-2 btn-outline-danger float-end"
+      (click)="adminLogout(admin.id)"
+      type="button"
+    >
+      LogOut
+    </button>
+  </span>
+</div>
+<div class="container">
+  <div class>
+    <button
+      class="btn my-2 btn-outline-success"
+      (click)="addAdmin()"
+      type="button"
+    >
+      Add Admin
+    </button>
+
+    <br />
+
+    <button
+      (click)="getUnApprovedQuestions()"
+      class="btn my-2 btn-outline-info"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#questionTable"
+      aria-expanded="false"
+      aria-controls="questionTable"
+    >
+      Get UnApproved Questions
+    </button>
+    <br />
+    <div *ngIf="questionThere" class="collapse" id="questionTable">
+      <table class="table">
+        <tr class="table-success table-striped">
+          <th>Id</th>
+          <th>Question</th>
+          <th>Posted By</th>
+          <th>Topic</th>
+          <th>Approve</th>
+          <th>Reject</th>
+        </tr>
+
+        <tr
+          class="table-success table-striped"
+          *ngFor="let question of questions"
+        >
+          <td>{{ question.id }}</td>
+          <td>{{ question.question }}</td>
+          <td>{{ question.user.name }}</td>
+          <td>{{ question.topic }}</td>
+          <td>
+            <button
+              class="btn btn-outline-success"
+              id="{{ question }}"
+              (click)="approveQuestion(question.id)"
+            >
+              Approve
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-outline-danger"
+              id="{{ question }}"
+              (click)="deleteQuestion(question.id)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <button
+      (click)="getUnApprovedAnswers()"
+      class="btn my-2 btn-outline-info"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#answerTable"
+      aria-expanded="false"
+      aria-controls="answerTable"
+    >
+      Get UnApproved Answers
+    </button>
+    <div *ngIf="answerThere" class="collapse" id="answerTable">
+      <table class="table table-success table-striped">
+        <tr>
+          <th>Id</th>
+          <th>Answer</th>
+          <th>Answer Given by</th>
+          <th>Approve</th>
+          <th>Reject</th>
+        </tr>
+
+        <tr *ngFor="let answer of answers">
+          <td>{{ answer.id }}</td>
+          <td>{{ answer.answer }}</td>
+          <td>{{ answer.answerUser.name }}</td>
+
+          <td>
+            <button
+              class="btn btn-outline-success"
+              id="{{ answer.id }}"
+              (click)="approveAnswer(answer.id)"
+            >
+              Approve
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-outline-danger"
+              id="{{ answer.id }}"
+              (click)="deleteAnswer(answer.id)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <button
+      (click)="getAllUsers()"
+      class="btn my-2 btn-outline-info"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#userTable"
+      aria-expanded="false"
+      aria-controls="userTable"
+    >
+      Get All Users
+    </button>
+    <div *ngIf="userThere" class="collapse" id="userTable">
+      <table class="table table-striped table-hover">
+        <tr>
+          <th>Id</th>
+          <th>UserName</th>
+          <th>User Email</th>
+          <th>PhoneNumber</th>
+        </tr>
+
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phoneNumber }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
